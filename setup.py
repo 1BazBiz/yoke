@@ -13,7 +13,7 @@ if platform.system() == 'Windows':
     import ctypes # https://stackoverflow.com/questions/2963263/
     if not (platform.release() in ('Vista', '7', '8', '8.1', 'post8.1', '10', 'post10', '11')):
         raise SystemError('Yoke depends on the vJoy driver, which needs Windows Vista SP1 or higher.')
-    elif platform.release() in ('Vista', '7', '8', '8.1', 'post8.1') or [int(v) for v in platform.version().split('.')[0:3]] <= [10, 0, 1803]:
+    elif platform.release() in ('Vista', '7', '8', '8.1', 'post8.1', '11') or [int(v) for v in platform.version().split('.')[0:3]] <= [10, 0, 1803]:
         DLL_path = 'vjoy/vJoyInterface-' + platform.architecture()[0] + '-legacy.dll'
     else:
         DLL_path = 'vjoy/vJoyInterface-' + platform.architecture()[0] + '-modern.dll'
@@ -33,7 +33,7 @@ class PostInstallCommand(install):
     # After installation, pip parses setup.py again and the previous content of every variable is lost.
     def run(self):
         if platform.system() == 'Windows':
-            if platform.release() in ('Vista', '7', '8', '8.1', 'post8.1') or [int(v) for v in platform.version().split('.')[0:3]] <= [10, 0, 1803]:
+            if platform.release() in ('Vista', '7', '8', '8.1', 'post8.1', '11') or [int(v) for v in platform.version().split('.')[0:3]] <= [10, 0, 1803]:
                 vJoy_url = 'https://sourceforge.net/projects/vjoystick/files/Beta%202.x/2.1.8.39-270518/vJoySetup.exe/download'
             else:
                 vJoy_url = 'https://sourceforge.net/projects/vjoystick/files/latest/download'
